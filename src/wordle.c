@@ -21,13 +21,13 @@ void statusUpdate(char guess[],int status[],int mappedWord[],char word[]);
 void display(int status[], char guess[]);
 bool win(int status[]);
 
-//bool winConditionMatched(char guess[], char word[]);
+
 
 int main(int argc, char** argv)
 {
      char* word = getWord();
      wordLen = strlen(word);
-     printf("word is %s",word);
+   //  printf("word is %s",word);
 
     int mappedWord[26] = {0};    
     //mapping letters
