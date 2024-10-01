@@ -3,6 +3,7 @@
 #include<stdbool.h>
 #include<time.h>
 #include<string.h>
+#include<ctype.h>
 
 
 #define RED "\033[0m\e[0;31m"
@@ -21,13 +22,13 @@ void statusUpdate(char guess[],int status[],int mappedWord[],char word[]);
 void display(int status[], char guess[]);
 bool win(int status[]);
 
-//bool winConditionMatched(char guess[], char word[]);
+
 
 int main(int argc, char** argv)
 {
      char* word = getWord();
      wordLen = strlen(word);
-     printf("word is %s",word);
+   //  printf("word is %s",word);
 
     int mappedWord[26] = {0};    
     //mapping letters
@@ -63,6 +64,8 @@ int main(int argc, char** argv)
             printf("guess %d>>",i+1);
             scanf("%s",buffer);
         } while(strlen(buffer) != wordLen);
+        for(int i = 0; i < wordLen; i++)
+            buffer[i] = tolower(buffer[i]);
         strncpy(guess,buffer,wordLen);
         statusUpdate(guess,status,mappedWord,word);
         display(status,guess);
@@ -121,7 +124,7 @@ void statusUpdate(char guess[],int status[],int mappedword[],char word[])
     }
     for(int i = 0; i < wordLen; i++)
     {
-        if(status[i] == -1 && copy[guess[i] - 'a'] != 0)
+        if(isalpha(guess[i]) && status[i] == -1 && copy[guess[i] - 'a'] != 0)
         {
             copy[guess[i] - 'a']--;
             status[i] = 0;
@@ -153,6 +156,3 @@ bool win(int status[])
     }
     return true;
 }
-
-
-
